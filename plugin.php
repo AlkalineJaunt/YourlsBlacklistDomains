@@ -36,7 +36,8 @@ yourls_add_action( 'plugins_loaded', 'apelly_blacklist_domain_add_page' );
 
 // Get blacklisted domains from YOURLS options feature and compare with current domain address
 function apelly_blacklist_domain_root ( $bol, $url ) {
-	$return = false;
+	// Preserve the core pass-through value (false before 1.10.4, a sentinel since 1.10.4).
+	$return = $bol;
 	$domain_list = yourls_get_option ('apelly_blacklist_domain_list');
 	if ( $domain_list ) {
 		$domain_list = unserialize ( $domain_list );
